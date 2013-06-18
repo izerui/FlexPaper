@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+				xmlns:fp="com.devaldi.controls.flexpaper.*" 
+				layout="absolute" width="100%" height="100%"   
+				creationComplete="initApp();">  
+	
+	<mx:Script>  
+		<![CDATA[  
+			import mx.controls.Alert;  
+			
+			public var _aid = 0;//文档ID  
+			
+			[Bindable]  
+			public var _Scale:Number = 1;//缩放比例  
+			
+			[Bindable]  
+			public var _SwfFile:String = "";//SWF文件路径  
+			
+			[Bindable]  
+			public var _ZoomTransition:String = "easeOut";  
+			
+			[Bindable]  
+			public var _ZoomTime:Number = 0.6;  
+			
+			[Bindable]  
+			public var _ZoomInterval:Number = 0.1;  
+			
+			[Bindable]  
+			public var _FitPageOnLoad:Boolean = false;//加载后适合高度  
+			
+			[Bindable]  
+			public var _FitWidthOnLoad:Boolean = false;//加载后适合宽度  
+			
+			[Bindable]  
+			public var _PrintNotEnabled:Boolean = true;//是否支持打印  
+			
+			[Bindable]  
+			public var _FullScreenAsMaxWindow:Boolean = false;//是否支付全屏  
+			
+			[Bindable]  
+			public var _ProgressiveLoading:Boolean = false;//是否延迟加载  
+			[Bindable]  
+			public var _PrintEnabled:Boolean = true;//是否开启打印按钮
+			[Bindable]  
+			public var _PrintToolsVisible:Boolean = true;//是否显示打印按钮
+			[Bindable]  
+			public var _ShowAbout:Boolean = true;//是否显示关于
+			
+			private var isFocus:Boolean = false;  
+			
+			//初始化参数  
+			private function initApp():void{  
+				var params:Object = Application.application.parameters;  
+				_Scale = getNumber(params, "Scale", 1);  
+				_SwfFile = getString(params, "SwfFile", _SwfFile);  
+				_ZoomTransition = getString(params, "ZoomTransition", "easeOut");  
+				_ZoomTime = getNumber(params, "ZoomTime", 0.6);  
+				_ZoomInterval = getNumber(params, "ZoomInterval", 0.1);  
+				_FitPageOnLoad = getBoolean(params, "FitPageOnLoad", false);  
+				_FitWidthOnLoad = getBoolean(params, "FitWidthOnLoad", false);  
+				_PrintNotEnabled = getBoolean(params, "PrintNotEnabled", true);  
+				_FullScreenAsMaxWindow = getBoolean(params, "FullScreenAsMaxWindow", false);  
+				_ProgressiveLoading = getBoolean(params, "ProgressiveLoading", true);  
+				_PrintEnabled = getBoolean(params, "PrintEnabled", true);  
+				_PrintToolsVisible = getBoolean(params, "PrintToolsVisible", true);  
+				_ShowAbout = getBoolean(params, "ShowAbout", false);  
+				
+				//注册事件监听  
+				this.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);  
+				this.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);  
+				
+				//开放给外部（javascript）调用  
+				ExternalInterface.addCallback("hasFocus", hasFocus);  
+				//ExternalInterface.addCallback("focus", focus);   
+				ExternalInterface.addCallback("setViewerFocus", setViewerFocus);   
+				
+			}  
+			
+			
+			
+			private function onMouseOver(event:MouseEvent):void{  
+				this.isFocus = true;  
+			}  
+			
+			private function onMouseOut(event:MouseEvent):void{  
+				this.isFocus = false;  
+			}  
+			
+			public function hasFocus():Boolean{  
+				//Alert.show("hasFocus");  
+				return isFocus;  
+			}  
+			
+			public function setViewerFocus(isFocus:Boolean):void{    
+				//Alert.show("setViewerFocus");  
+				this.paperViewer.setViewerFocus();  
+			}  
+			
+			
+			/** 
+			 *  
+			 * 获取String类型参数 
+			 * 如果没有，则返回默认值 
+			 **/ 
+			private function getString(params:Object, name:String, def:String):String{  
+				if(params[name] != null){  
+					return params[name];  
+				}  
+				return def;  
+			}  
+			
+			private function getNumber(params:Object, name:String, def:Number):Number{  
+				if(params[name] != null){  
+					return params[name];  
+				}  
+				return def;  
+			}  
+			
+			private function getBoolean(params:Object, name:String, def:Boolean):Boolean{  
+				//Alert.show("比较："+name);  
+				if(params[name] != null){  
+					return params[name] == "true";  
+				}   
+				return def;  
+			}  
+		]]>  
+	</mx:Script>  
+	<!--mx:Panel x="165" y="76" width="250" height="200" layout="absolute" title="一个人">  
+	<mx:Label x="59" y="37" text="{Scale}" width="88"/>  
+	</mx:Panel-->  
+	
+	<fp:FlexPaperViewer id="paperViewer" 
+						width="100%"   
+						height="100%"   
+						Scale="{_Scale}"   
+						SwfFile="{_SwfFile}"
+						ZoomTransition="{_ZoomTransition}"   
+						ZoomTime="{_ZoomTime}"   
+						ZoomInterval="{_ZoomInterval}" 
+						FitPageOnLoad="{_FitPageOnLoad}" 
+						FitWidthOnLoad="{_FitWidthOnLoad}" 
+						PrintToolsVisible="{_PrintToolsVisible}"
+						PrintEnabled="{_PrintEnabled}"
+						ShowAbout="{_ShowAbout}"
+						FullScreenAsMaxWindow="{_FullScreenAsMaxWindow}" 
+						ProgressiveLoading="{_ProgressiveLoading}" />  
+</mx:Application>
