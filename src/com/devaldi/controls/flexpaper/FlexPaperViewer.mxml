@@ -105,7 +105,7 @@ along with FlexPaper.  If not, see <http://www.gnu.org/licenses/>.
 				spin1.visible = false;
 				lblProgress.visible = false;
 				spin1.stop();
-				bttnInfo.visible = (new MenuIcons.SMALL_TRANSPARENT().width > 10);
+				bttnInfo.visible = (new MenuIcons.SMALL_TRANSPARENT().width > 10)&&ShowAbout;
 				PrintEnabled = true;
 				
 				super.documentLoadedHandler(event);
@@ -115,7 +115,7 @@ along with FlexPaper.  If not, see <http://www.gnu.org/licenses/>.
 				spin1.visible = false;
 				lblProgress.visible = false;
 				spin1.stop();
-				bttnInfo.visible = (new MenuIcons.SMALL_TRANSPARENT().width > 10);
+				bttnInfo.visible = (new MenuIcons.SMALL_TRANSPARENT().width > 10)&&ShowAbout;
 				PrintEnabled = true;
 				
 				super.pageLoadedEventHandler(event);
@@ -203,8 +203,8 @@ along with FlexPaper.  If not, see <http://www.gnu.org/licenses/>.
 	</mx:Script>
 	<mx:Style source="styles/default.css" />    
 	<mx:HBox styleName="toolbarBackground" width="100%" height="26" borderStyle="solid" verticalScrollPolicy="off" horizontalScrollPolicy="off" paddingTop="2" paddingLeft="2" horizontalGap="3">
-		<st:GradientImageButton icon="{MenuIcons.PRINT_ICON}" styleName="toolbttn" width="20" click="printPaper(event)" toolTip="@Resource(key='Print', bundle='FlexPaper')" visible="{!ReadOnly}" includeInLayout="{!ReadOnly}" enabled="{PrintEnabled}" />
-		<mx:Image source="{MenuIcons.BAR}" width="3" height="21" visible="{!ReadOnly}" includeInLayout="{!ReadOnly}"  />
+		<st:GradientImageButton icon="{MenuIcons.PRINT_ICON}" styleName="toolbttn" width="20" click="printPaper(event)" toolTip="@Resource(key='Print', bundle='FlexPaper')" visible="{PrintToolsVisible}" includeInLayout="{PrintToolsVisible}" enabled="{PrintEnabled}" />
+		<mx:Image source="{MenuIcons.BAR}" width="3" height="21" visible="{PrintToolsVisible}" includeInLayout="{PrintToolsVisible}"  />
 		
 		<st:GradientImageButton icon="{MenuIcons.SINGLE_PAGE}" styleName="toolbttn" width="20" click="paper1.switchMode(Viewer.InitViewMode);" toolTip="@Resource(key='SinglePage', bundle='FlexPaper')" selected="{paper1.ViewMode == Viewer.InitViewMode}" tabIndex="2" visible="{ViewModeToolsVisible}" includeInLayout="{ViewModeToolsVisible}"/>
 		<st:GradientImageButton icon="{MenuIcons.TWO_PAGE}" styleName="toolbttn" width="20" click="paper1.switchMode('TwoPage');" toolTip="@Resource(key='TwoPage', bundle='FlexPaper')" selected="{paper1.ViewMode == ViewModeEnum.TWOPAGE}"  tabIndex="3" visible="{ViewModeToolsVisible}" includeInLayout="{ViewModeToolsVisible}" enabled="{paper1.numPages>1}"/>
@@ -237,7 +237,7 @@ along with FlexPaper.  If not, see <http://www.gnu.org/licenses/>.
 		<mx:Image source="{MenuIcons.BAR}" width="3" height="21" visible="{SearchToolsVisible}" includeInLayout="{SearchToolsVisible}" />
 		
 		<mx:Canvas width="100%" id="cnv_info" horizontalScrollPolicy="off" verticalScrollPolicy="off" height="100%">
-			<st:GradientImageButton id="bttnInfo" left="{cnv_info.width-21}" visible="false" icon="{MenuIcons.SMALL_GRAY}" styleName="toolbttn" width="20" height="20" click="showInfo(event);" toolTip="@Resource(key='About', bundle='FlexPaper')" addedToStage="{new MenuIcons.SMALL_TRANSPARENT().width > 10}" />
+			<st:GradientImageButton id="bttnInfo" left="{cnv_info.width-21}" visible="false" icon="{MenuIcons.SMALL_GRAY}" styleName="toolbttn" width="20" height="20" click="showInfo(event);" includeInLayout="{ShowAbout}" toolTip="@Resource(key='About', bundle='FlexPaper')" addedToStage="{new MenuIcons.SMALL_TRANSPARENT().width > 10}" />
 			<st:GradientLabel id="lblProgress" left="{cnv_info.width-26}" textAlign="center" y="4" fontSize="8" height="19" width="32" text="" tabIndex="18"/>
 			<ct:Spinner id="spin1" left="{cnv_info.width-22}" styleName="gradientlines" y="-1" startImmediately="false" spinnerType="gradientcircle" width="22" height="22" />
 		</mx:Canvas>

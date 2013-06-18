@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties mainApplicationPath="FlexPaper.as" projectUUID="0c390136-347b-4404-8d11-dd4c4ca3d104" version="6">
-  <compiler additionalCompilerArguments="-allow-source-path-overlap=true" autoRSLOrdering="true" copyDependentFiles="false" flex3CompatMode="false" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" sourceFolderPath="src" strict="true" targetPlayerVersion="11.3.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-allow-source-path-overlap=true" autoRSLOrdering="true" copyDependentFiles="false" flex3CompatMode="false" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderLocation="DOCUMENTS/FlexPaperSwf/libs" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="11.3.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
     </compilerSourcePath>

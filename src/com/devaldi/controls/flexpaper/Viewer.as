@@ -1463,6 +1463,7 @@ package com.devaldi.controls.flexpaper
 			_skinImgDo.addEventListener(MouseEvent.MOUSE_OUT,skinMouseOut,false,0,true);
 			_skinImgDo.addEventListener(MouseEvent.MOUSE_DOWN,skinMouseDown,false,0,true);
 			_skinImgDo.buttonMode = true;
+			_skinImgDo.visible = false;
 			addChild(_skinImgDo); 
 			
 			// Add the swf to the invisible container.

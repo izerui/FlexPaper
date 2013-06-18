@@ -73,6 +73,10 @@
 			public var ZoomInterval:Number = 0.1;
 			
 			[Bindable]
+			public var ShowAbout:Boolean = true;//是否显示打印按钮
+			[Bindable]
+			public var PrintToolsVisible:Boolean = false;//是否显示打印按钮
+			[Bindable]
 			public var FitPageOnLoad:Boolean = false;
 			
 			[Bindable]
@@ -180,7 +184,7 @@
 					contextMenu.clipboardItems.selectAll = false;
 				}
 				
-				if(new MenuIcons.SMALL_TRANSPARENT().width > 10){
+				if(new MenuIcons.SMALL_TRANSPARENT().width > 10&&ShowAbout){
 					var cmi_about:ContextMenuItem = new ContextMenuItem(resourceManager.getString("FlexPaper", "About")+' FlexPaper');
 					cmi_about.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, showInfo);
 					contextMenu.customItems.push(cmi_about);
